@@ -3,8 +3,8 @@ from pymessenger.bot import Bot
 from answers import get_answer
 
 app = Flask(__name__)
-ACCESS_TOKEN = 'EAAH453cHopIBAPJptXBPqjZAjrtTxCinXBHJlgJsZC40IGYuoEdZBYqUbDcnYzM6fEGlsWPZAFZCbOB09dGnhXjPtZAjugy81D6LhwZA5aubQHrW0s94Fcfi5wzFYoswACI7ybLuSztkGHVg4liENCdvFk4oXcfLk1DoBoL8dUZBN9PZBZCunW6sOt'
-VERIFY_TOKEN = 'super_token'
+ACCESS_TOKEN = 'EAABZBUpXeZAccBAIN56V6TyndFekvgk2P7wJZCZAgvuBmsYfAXOASZAiRpFG0QzDMjPA5X75hBrrXAlSy1XLdnmUZCNWn7GS9Pm36BeYp68vaTnIbQVZCRTqNkNjM1hME8lvZBZAvpwaWYHFuEWheQ8trg12jBZA7LAXeJvJYcCzov8KA8mBZAW4m5M'
+VERIFY_TOKEN = 'secure_token'
 bot = Bot(ACCESS_TOKEN)
 
 
