@@ -79,14 +79,14 @@ def get_answer(message):
     if email == True:
         send_email(message)
         result = 'Thank you. Our support will contact to you soon.'
-    elif location != None and message.title() not in hello:
+    elif location != None and message.title() not in hello and len(message) > 5:
         data = find_near(location)
         result = 'The nearest Centrepoint is in {} only at {} kilometers from you'.format(data[2], round(data[6], 2))
     else:
-        # try:
-        result = answer(message)
-        # except Exception:
-        #     result = 'Ooops. Something goes wrong. Please, try again.'
+        try:
+            result = answer(message)
+        except Exception:
+            result = 'Ooops. Something goes wrong. Please, try again.'
 
     if language == 'ar':
         result = translator.translate(result, dest='ar', src='en').text

@@ -1,9 +1,14 @@
 from flask import Flask, request
 from pymessenger.bot import Bot
 from answers import get_answer
+from OpenSSL import SSL
+
+context = SSL.Context(SSL.SSLv23_METHOD)
+context.use_privatekey_file('yourserver.key')
+context.use_certificate_file('yourserver.crt')
 
 app = Flask(__name__)
-ACCESS_TOKEN = 'EAABZBUpXeZAccBAIN56V6TyndFekvgk2P7wJZCZAgvuBmsYfAXOASZAiRpFG0QzDMjPA5X75hBrrXAlSy1XLdnmUZCNWn7GS9Pm36BeYp68vaTnIbQVZCRTqNkNjM1hME8lvZBZAvpwaWYHFuEWheQ8trg12jBZA7LAXeJvJYcCzov8KA8mBZAW4m5M'
+ACCESS_TOKEN = 'EAABZB7rTDwz0BAOLCagyeTz9owJqZB10man7mbtO0TC5PtnTRbaECWq5ISrwvrmp5tJbhLIlCyfrut7zKV2cewwJZCJMP041sDVcVvNpHBWFM8x8IXySzojkJA1OaZCaTRJB9QNRT39QD6TSfZAhTssDSLil4a6cYOaZCdJkXsZA0orL6DoTUFl'
 VERIFY_TOKEN = 'secure_token'
 bot = Bot(ACCESS_TOKEN)
 
