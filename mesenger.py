@@ -35,6 +35,7 @@ def receive_message():
                         print(message['message'].get('text'), message['sender'].get('id'))
                         print message
                         sender = get_sender_name(message['sender'].get('id'))
+                        parse_unicode(message['message'].get('text'))
                         print sender
                         response_sent_text = get_answer(sender, message['message'].get('text'))
                         send_message(recipient_id, response_sent_text)
@@ -52,6 +53,10 @@ def verify_fb_token(token_sent):
     if token_sent == VERIFY_TOKEN:
         return request.args.get("hub.challenge")
     return 'Invalid verification token'
+
+
+def parse_unicode(text):
+    print unicodedata.normalize('NFKD', text).encode('ascii', 'ignore')
 
 
 def get_sender_name(sender_id):
