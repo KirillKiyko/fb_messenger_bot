@@ -83,8 +83,12 @@ def get_answer(sender, message):
     if language == 'ar':
         message = translator.translate(message, dest='en', src='ar').text
 
-    email = validate_email(message)
-    location = validate_location(message)
+    try:
+        email = validate_email(message)
+        location = validate_location(message)
+    except Exception:
+        email = False
+        location = None
 
     if email == True:
         send_email(sender, message)
@@ -102,6 +106,7 @@ def get_answer(sender, message):
         result = translator.translate(result, dest='ar', src='en').text
 
     return result
+
 
 geolocator = Nominatim()
 translator = Translator()
