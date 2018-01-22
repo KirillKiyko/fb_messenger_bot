@@ -80,8 +80,10 @@ def get_answer(sender, message):
     except Exception:
         language = 'en'
 
+
     if language == 'ar':
         message = translator.translate(message, dest='en', src='ar').text
+
 
     try:
         email = validate_email(message)

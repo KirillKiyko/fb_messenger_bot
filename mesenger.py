@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+import ast
+import requests
+import unicodedata
+
 from flask import Flask, request
 from pymessenger.bot import Bot
 from answers import get_answer
@@ -30,11 +34,13 @@ def receive_message():
                     if message['message'].get('text'):
                         print(message['message'].get('text'), message['sender'].get('id'))
                         print message
-                        response_sent_text = get_answer(message['sender'].get('id'), message['message'].get('text'))
+                        sender = get_sender_name(message['sender'].get('id'))
+                        response_sent_text = get_answer(sender, message['message'].get('text'))
                         send_message(recipient_id, response_sent_text)
                     # if user sends us a GIF, photo,video, or any other non-text item
                     if message['message'].get('attachments'):
-                        response_sent_nontext = get_answer(message['sender'].get('id'), message['message'].get('text'))
+                        sender = get_sender_name(message['sender'].get('id'))
+                        response_sent_nontext = get_answer(sender, message['message'].get('attachments'))
                         send_message(recipient_id, response_sent_nontext)
     return "Message Processed"
 
@@ -46,6 +52,16 @@ def verify_fb_token(token_sent):
         return request.args.get("hub.challenge")
     return 'Invalid verification token'
 
+
+def get_sender_name(sender_id):
+    sender_id = unicodedata.normalize('NFKD', sender_id).encode('ascii', 'ignore')
+
+    r = requests.get("https://graph.facebook.com/v2.6/{}?fields=first_name,last_name,profile_pic&access_token={}".format(sender_id, ACCESS_TOKEN))
+    r = ast.literal_eval(r.text)
+
+    sender = r.get('first_name') + ' ' + r.get('last_name')
+
+    return sender
 
 # uses PyMessenger to send response to user
 def send_message(recipient_id, response):
