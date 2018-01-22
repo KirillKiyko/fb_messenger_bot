@@ -11,26 +11,36 @@ from geopy.geocoders import Nominatim
 from validate_email import validate_email
 
 
-def send_email(email):
+def send_email(sender, email):
     bot = 'centrepointbot@gmail.com'
     user = email
-    support = 'nordstone333@gmail.com'
+    support1 = 't.malak@ipn.ae'
+    support2 = 'shalini.sharma@landmarkgroup.com'
 
     password = 'qwerty678606'
 
-    msg = '\r\n'.join([
+    msg1 = '\r\n'.join([
         'From: {}'.format(bot),
-        'To: {}'.format(support),
+        'To: {}'.format(support1),
         'Subject: Centrepoint Bot Report',
         '',
-        'Hi! {} have some questions. Write to him, please.'.format(user)
+        'Twitter: User {}({}) have some questions. Please, address the same at the earliest.'.format(sender, user)
+    ])
+
+    msg2 = '\r\n'.join([
+        'From: {}'.format(bot),
+        'To: {}'.format(support1),
+        'Subject: Centrepoint Bot Report',
+        '',
+        'Twitter: User {}({}) have some questions. Please, address the same at the earliest.'.format(sender, user)
     ])
 
     server = smtplib.SMTP('smtp.gmail.com:587')
     server.ehlo_or_helo_if_needed()
     server.starttls()
     server.login(bot, password)
-    server.sendmail(bot, [support], msg)
+    server.sendmail(bot, [support1], msg1)
+    server.sendmail(bot, [support2], msg2)
     server.quit()
 
 
@@ -64,7 +74,7 @@ def answer(text):
     return result
 
 
-def get_answer(message):
+def get_answer(sender, message):
     try:
         language = detect(message)
     except Exception:
@@ -73,15 +83,15 @@ def get_answer(message):
     if language == 'ar':
         message = translator.translate(message, dest='en', src='ar').text
 
-    email = validate_email(message, verify=True)
+    email = validate_email(message)
     location = validate_location(message)
 
     if email == True:
-        send_email(message)
+        send_email(sender, message)
         result = 'Thank you. Our support will contact to you soon.'
-    elif location != None and message.title() not in hello and len(message) > 5:
+    elif location != None and message.title() and len(message) > 10:
         data = find_near(location)
-        result = 'The nearest Centrepoint is in {} only at {} kilometers from you'.format(data[2], round(data[6], 2))
+        result = 'The nearest Centrepoint is in {} only at {} kilometers from you. {}'.format(data[2], round(data[6], 2), data[5])
     else:
         try:
             result = answer(message)
