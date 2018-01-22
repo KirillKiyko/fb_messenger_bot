@@ -82,7 +82,10 @@ def get_answer(sender, message):
 
 
     if language == 'ar':
-        message = translator.translate(message, dest='en', src='ar').text
+        try:
+            message = translator.translate(message, dest='en', src='ar').text
+        except Exception:
+            pass
 
 
     try:
