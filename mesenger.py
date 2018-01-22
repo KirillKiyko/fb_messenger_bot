@@ -35,6 +35,7 @@ def receive_message():
                         print(message['message'].get('text'), message['sender'].get('id'))
                         print message
                         sender = get_sender_name(message['sender'].get('id'))
+                        print sender
                         response_sent_text = get_answer(sender, message['message'].get('text'))
                         send_message(recipient_id, response_sent_text)
                     # if user sends us a GIF, photo,video, or any other non-text item
