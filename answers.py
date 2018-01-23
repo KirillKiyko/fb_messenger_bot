@@ -24,7 +24,7 @@ def send_email(sender, email):
         'To: {}'.format(support1),
         'Subject: Centrepoint Bot Report',
         '',
-        'Twitter: User {}({}) have some questions. Please, address the same at the earliest.'.format(sender, user)
+        'Facebook: User {}({}) have some questions. Please, address the same at the earliest.'.format(sender, user)
     ])
 
     msg2 = '\r\n'.join([
@@ -32,7 +32,7 @@ def send_email(sender, email):
         'To: {}'.format(support1),
         'Subject: Centrepoint Bot Report',
         '',
-        'Twitter: User {}({}) have some questions. Please, address the same at the earliest.'.format(sender, user)
+        'Facebook: User {}({}) have some questions. Please, address the same at the earliest.'.format(sender, user)
     ])
 
     server = smtplib.SMTP('smtp.gmail.com:587')
