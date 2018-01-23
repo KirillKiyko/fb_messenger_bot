@@ -90,7 +90,8 @@ def get_answer(sender, message):
 
     try:
         email = validate_email(message)
-        location = validate_location(message)
+        # location = validate_location(message)
+        location = None
     except Exception:
         email = False
         location = None
