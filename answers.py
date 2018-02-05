@@ -24,10 +24,8 @@ def mobile_validation(number):
 def send_email(sender, email):
     bot = 'centrepointbot@gmail.com'
     user = email
-    # support1 = 't.malak@ipn.ae'
-    # support2 = 'shalini.sharma@landmarkgroup.com'
-    support1 = 'kijko97@gmail.com'
-    support2 = 'nordstone333@gmail.com'
+    support1 = 't.malak@ipn.ae'
+    support2 = 'shalini.sharma@landmarkgroup.com'
 
     password = 'qwerty678606'
 
