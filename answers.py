@@ -3,7 +3,10 @@ import json
 import apiai
 import smtplib
 import pandas as pd
+import phonenumbers
 
+from phonenumbers import carrier
+from phonenumbers.phonenumberutil import number_type
 from langdetect import detect
 from googletrans import Translator
 from geopy.distance import vincenty
@@ -11,11 +14,20 @@ from geopy.geocoders import Nominatim
 from validate_email import validate_email
 
 
+def mobile_validation(number):
+    try:
+        return carrier._is_mobile(number_type(phonenumbers.parse(number)))
+    except Exception:
+        return False
+
+
 def send_email(sender, email):
     bot = 'centrepointbot@gmail.com'
     user = email
-    support1 = 't.malak@ipn.ae'
-    support2 = 'shalini.sharma@landmarkgroup.com'
+    # support1 = 't.malak@ipn.ae'
+    # support2 = 'shalini.sharma@landmarkgroup.com'
+    support1 = 'kijko97@gmail.com'
+    support2 = 'nordstone333@gmail.com'
 
     password = 'qwerty678606'
 
@@ -93,11 +105,13 @@ def get_answer(sender, message):
         # location = validate_location(message)
         email = None
         location = None
+        phone = mobile_validation(message)
     except Exception:
         email = False
         location = None
+        phone = mobile_validation(message)
 
-    if email == True:
+    if phone == True:
         send_email(sender, message)
         result = 'Thank you. Our support will contact to you soon.'
     elif location != None and message.title() and len(message) > 10:
