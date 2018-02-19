@@ -24,20 +24,11 @@ def mobile_validation(number):
 def send_email(sender, email):
     bot = 'centrepointbot@gmail.com'
     user = email
-    support1 = 't.malak@ipn.ae'
-    support2 = 'shalini.sharma@landmarkgroup.com'
+    support1 = 'shalini.sharma@landmarkgroup.com'
 
     password = 'qwerty678606'
 
     msg1 = '\r\n'.join([
-        'From: {}'.format(bot),
-        'To: {}'.format(support1),
-        'Subject: Centrepoint Bot Report',
-        '',
-        'Facebook: User {}({}) have some questions. Please, address the same at the earliest.'.format(sender, user)
-    ])
-
-    msg2 = '\r\n'.join([
         'From: {}'.format(bot),
         'To: {}'.format(support1),
         'Subject: Centrepoint Bot Report',
@@ -50,7 +41,6 @@ def send_email(sender, email):
     server.starttls()
     server.login(bot, password)
     server.sendmail(bot, [support1], msg1)
-    server.sendmail(bot, [support2], msg2)
     server.quit()
 
 
