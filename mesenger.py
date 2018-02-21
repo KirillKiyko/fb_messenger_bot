@@ -65,7 +65,7 @@ def get_sender_name(sender_id):
     r = requests.get("https://graph.facebook.com/v2.6/{}?fields=first_name,last_name,profile_pic&access_token={}".format(sender_id, ACCESS_TOKEN))
     r = ast.literal_eval(r.text)
 
-    sender = r.get('first_name') + ' ' + r.get('last_name')
+    sender = '{first_name} {last_name}'.format(first_name=r.get('first_name'), last_name=r.get('last_name'))
 
     return sender
 
