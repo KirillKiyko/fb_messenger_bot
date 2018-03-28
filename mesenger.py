@@ -8,8 +8,8 @@ from pymessenger.bot import Bot
 from answers import get_answer
 
 app = Flask(__name__)
-ACCESS_TOKEN = 'EAABZB7rTDwz0BAOLCagyeTz9owJqZB10man7mbtO0TC5PtnTRbaECWq5ISrwvrmp5tJbhLIlCyfrut7zKV2cewwJZCJMP041sDVcVvNpHBWFM8x8IXySzojkJA1OaZCaTRJB9QNRT39QD6TSfZAhTssDSLil4a6cYOaZCdJkXsZA0orL6DoTUFl'
-VERIFY_TOKEN = 'secure_token'
+ACCESS_TOKEN = ''
+VERIFY_TOKEN = ''
 bot = Bot(ACCESS_TOKEN)
 
 
